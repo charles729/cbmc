@@ -47,6 +47,8 @@ Author: Daniel Kroening, kroening@kroening.com
 #include <goto-checker/stop_on_fail_verifier_with_fault_localization.h>
 
 #include <goto-programs/adjust_float_expressions.h>
+#include <goto-programs/goto_convert_functions.h>
+#include <goto-programs/goto_inline.h>
 #include <goto-programs/initialize_goto_model.h>
 #include <goto-programs/instrument_preconditions.h>
 #include <goto-programs/link_to_library.h>
@@ -812,6 +814,9 @@ bool cbmc_parse_optionst::process_goto_program(
 
     // instrument library preconditions
     instrument_preconditions(goto_model);
+
+    // shadow memory instrumentation
+    remove_shadow_memory(goto_model, log.get_message_handler());
 
     // remove returns, gcc vectors, complex
     remove_returns(goto_model);
