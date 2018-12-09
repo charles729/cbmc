@@ -129,6 +129,11 @@ public:
       nullptr,
     std::function<bool(void)> callback_after_symex = nullptr);
 
+  void set_symex_fields(const std::map<irep_idt, typet> &fields)
+  {
+    symex.fields = fields;
+  }
+
 protected:
   /// \brief Constructor for path exploration from saved state
   ///
