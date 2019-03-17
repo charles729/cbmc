@@ -129,9 +129,12 @@ public:
       nullptr,
     std::function<bool(void)> callback_after_symex = nullptr);
 
-  void set_symex_fields(const std::map<irep_idt, typet> &fields)
+  void set_symex_fields(
+    const std::pair<std::map<irep_idt, typet>, std::map<irep_idt, typet>>
+      &fields)
   {
-    symex.fields = fields;
+    symex.global_fields = fields.first;
+    symex.local_fields = fields.second;
   }
 
 protected:
